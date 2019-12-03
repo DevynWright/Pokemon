@@ -3,18 +3,24 @@ import store from "../store.js";
 
 //Private
 function _draw() {
-  //let template = "";
- //store.State.pokemon.forEach(pokemon =>{
-  //   template += pokemon.template;
-  // })
-  let pokemon = store.State.pokemon;
-  console.log(pokemon);
+let template = "";
+store.State.pokemon.forEach(pokemon =>{
+    console.log(pokemon);
+    template += pokemon.template;
+  });
+  document.getElementById("searchedPokemon").innerHTML = template;
+}
+
+function _drawOne(){
+  console.log(store.State.currentPokemon)
 }
 
 //Public
 export default class PokeController {
   constructor() {
     store.subscribe("pokemon", _draw);
+    store.subscribe("currentPokemon", _drawOne);
+    PokeService.getPokeListAsync()
   }
   async search() {
     event.preventDefault();

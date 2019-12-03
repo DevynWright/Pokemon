@@ -4,15 +4,17 @@ let _state = {
   /**@type{Pokemon[]} */
   pokemon: [],
   /**@type{Pokemon[]} */
-  caughtPokemon: []
+  caughtPokemon: [],
+  currentPokemon: {}
 };
 
 /** Collection of listeners to be called based on keyed state changes
  * @type {{[x:string]: function[]}}
  */
 let _listeners = {
- caughtPokemon: [],
- pokemon : []
+  caughtPokemon: [],
+  pokemon: [],
+  currentPokemon: []
 };
 
 //NOTE You should not need to change the code from this point down

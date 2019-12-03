@@ -10,7 +10,9 @@ export default class Pokemon {
 
     get Template() {
         return /*html*/ `
-        
+        <ol>
+            <li>${this.name}</li>
+        </ol>
         `
     }
 }

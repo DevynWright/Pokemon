@@ -8,7 +8,11 @@ class PokeService {
     async searchAsync(name) {
         console.log("service")
         let res = await _pokeApi.get("pokemon/" + name);
-        Store.commit("pokemon", res.data);
+        Store.commit("currentPokemon", res.data);
+    }
+    async getPokeListAsync(name) {
+        let res = await _pokeApi.get("pokemon");
+        Store.commit("pokemon", res.data.results);
     }
 
 
