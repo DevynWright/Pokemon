@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <header class="container-fluid">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1><b>Pokemon</b></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 text-center">
+          <h2><b>Pokedex</b></h2>
+          <form onsubmit="app.pokeController.search()">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              placeholder="Pokemon Name"
+            />
+            <button class="btn btn-success mt-1 form-control" type="submit">
+              Search
+            </button>
+          </form>
+          <!-- NOTE this div is to input all generated pokemon from api -->
+          <div></div>
+        </div>
+        <div class="col-4 text-center">
+          <h2><b>Pokemon</b></h2>
+          <!-- NOTE this div is to display pokemon selected -->
+          <div></div>
+        </div>
+        <div class="col-4 text-center">
+          <h2><b>Your Pokemon</b></h2>
+          <!-- NOTE this div is to display your current index of pokemon -->
+          <div></div>
+        </div>
+      </div>
+    </header>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"
+      integrity="sha256-XmdRbTre/3RulhYk/cOBUMpYlaAp2Rpo/s556u0OIKk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="app/main.js" type="module"></script>
+  </body>
+</html>
