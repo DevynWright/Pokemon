@@ -3,7 +3,6 @@ import Value from "./Models/Pokemon.js";
 let _state = {
   /**@type{Pokemon[]} */
   pokemon: [],
-  /**@type{Pokemon[]} */
   caughtPokemon: [],
   currentPokemon: {}
 };

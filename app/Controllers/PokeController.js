@@ -3,25 +3,43 @@ import store from "../store.js";
 
 //Private
 function _draw() {
-let template = "";
-store.State.pokemon.forEach(pokemon =>{
-    console.log(pokemon);
-    template += pokemon.template;
-  });
-  document.getElementById("searchedPokemon").innerHTML = template;
+  let template = "";
+  let pokemon = store.State.pokemon;
+  pokemon.forEach(pokemon => template += `<li onclick = "app.pokeController.pickPokemon('${pokemon.name}')">${pokemon.name}</li>`
+  );
+  document.getElementById("listPokemon").innerHTML = template;
+}
+function _drawCaughtPokemon() {
+  let template = "";
+  let caughtPokemon = store.State.caughtPokemon;
+  caughtPokemon.forEach(pokemon => template += `<li onclick = "app.pokeController.('${pokemon.name}')">${pokemon.name}</li>`
+  );
+  document.getElementById("myPoke").innerHTML = template;
 }
 
-function _drawOne(){
-  console.log(store.State.currentPokemon)
+function _drawCurrentPokemon(){
+  let pokemon = store.State.currentPokemon;
+  document.getElementById("currentPokemon").innerHTML = pokemon.Template;
+
 }
 
 //Public
 export default class PokeController {
   constructor() {
     store.subscribe("pokemon", _draw);
-    store.subscribe("currentPokemon", _drawOne);
+    store.subscribe("currentPokemon", _drawCurrentPokemon);
+    store.subscribe("caughtPokemon", _drawCaughtPokemon)
     PokeService.getPokeListAsync()
   }
+  
+async pickPokemon(name) {
+  try {
+    await PokeService.pickPokemonAsync(name)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
   async search() {
     event.preventDefault();
     console.log("controller")
@@ -35,7 +53,20 @@ export default class PokeController {
     }
   }
 
-
+  async selectPokemon(name) {
+    try {
+      await PokeService.selectPokemonAsync(name);
+    } catch (error) {
+      console.error(error)
+  }
+  }
+  async catch() {
+    try {
+      await PokeService.catchAsync()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
 
 }
