@@ -9,15 +9,20 @@ export default class Pokemon {
     }
 
     get Template() {
-        return /*html*/ `
+        let template = `
         <div class="card" style="width: 18rem;">
             <img src="${this.img}" class="card-img-top" alt="${this.name} sprite">
             <div class="card-body">
             <h5 class="card-title">${this.name}</h5>
             <p class="card-text">Height:${this.height}, Weight:${this.weight}</p>
-            <button onclick= "app.pokeController.catch()" class="btn btn-primary">Catch it</button>
-            </div>
-        </div>
-        `
+            `
+            if (this._id){
+                template += `<button onclick= "app.pokeController.release()" class="btn btn-danger">Release it</button>`
+            } else {
+                template += `<button onclick= "app.pokeController.catch()" class="btn btn-primary">Catch it</button>`
+            }
+            template += `</div>
+        </div>`
+        return template;
     }
 }

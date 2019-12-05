@@ -12,14 +12,19 @@ function _draw() {
 function _drawCaughtPokemon() {
   let template = "";
   let caughtPokemon = store.State.caughtPokemon;
-  caughtPokemon.forEach(pokemon => template += `<li onclick = "app.pokeController.('${pokemon.name}')">${pokemon.name}</li>`
+  caughtPokemon.forEach(pokemon => template += `<li onclick = "app.pokeController.pullCaught('${pokemon._id}')">${pokemon.name}</li>`
   );
   document.getElementById("myPoke").innerHTML = template;
 }
 
 function _drawCurrentPokemon(){
   let pokemon = store.State.currentPokemon;
-  document.getElementById("currentPokemon").innerHTML = pokemon.Template;
+  if(pokemon._id){
+    document.getElementById("currentPokemon").innerHTML = pokemon.Template;
+    return
+  }
+  document.getElementById("currentPokemon").innerHTML = "";
+
 
 }
 
@@ -30,8 +35,21 @@ export default class PokeController {
     store.subscribe("currentPokemon", _drawCurrentPokemon);
     store.subscribe("caughtPokemon", _drawCaughtPokemon)
     PokeService.getPokeListAsync()
+    PokeService.getMyPokeAsync()
   }
   
+pullCaught(id) {
+  PokeService.pullCaught(id)
+}
+
+async release() {
+  try {
+    await PokeService.releaseAsync()
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async pickPokemon(name) {
   try {
     await PokeService.pickPokemonAsync(name)

@@ -12,6 +12,17 @@ let _pokeApi = axios.create({
 
 class PokeService {
 
+    async releaseAsync() {
+        let res = await _sandbox.delete(store.State.currentPokemon._id);
+        store.commit("currentPokemon", {})
+        this.getMyPokeAsync();
+    }
+
+    pullCaught(id){
+        let caughtPokemon = store.State.caughtPokemon.find(e => e._id == id);
+        store.commit("currentPokemon", caughtPokemon)
+    }
+
     async catchAsync() {
         let currentPokemon = store.State.currentPokemon;
         let res = await _sandbox.post("", currentPokemon)
